@@ -1,0 +1,21 @@
+name: Femialert
+version: ${project.version}
+main: net.kunmc.lab.femialert.FemiAlert
+api-version: 1.16
+authors: [ MaiZe ]
+description: 倫理矯正プラグイン
+
+commands:
+  femialert:
+    description: 警告の表示と警告音を鳴らす
+    aliases: [ f ]
+    usage:
+      /f:メニューの表示
+      /f addplayer <Player>：プレイヤー(コマンド実行者)の追加
+      /f delplayer <Player>：プレイヤー(コマンド実行者)の削除
+      /f addword   <Word>  ：サブタイトル(ワード)の追加
+      /f delword   <Word>  ：サブタイトル(ワード)の削除
+      /f settitle  <Word>  ：タイトル(警告)の文字を設定
+      /f modsound  <Word>  ：警告音の変更
+permission:
+    default: op
