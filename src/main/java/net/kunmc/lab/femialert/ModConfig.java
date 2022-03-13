@@ -4,13 +4,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModConfig extends JavaPlugin {
     private static String defaultpath = "Player_name.";
     //Map Playermap = new HashMap();
 
     public static void addPlayer(CommandSender sender, FileConfiguration config, String[] args) {
+        // 引数が不足してないか判定
+        if (args.length == 0) {
+            sender.sendMessage("引数がありません");
+            return;
+        }
+
         // 初期登録用のワードリスト作成
         List<String> defaultwordlist = new ArrayList<String>();
 
@@ -37,6 +44,12 @@ public class ModConfig extends JavaPlugin {
     }
 
     public static void delPlayer(CommandSender sender, FileConfiguration config, String[] args) {
+        // 引数が不足してないか判定
+        if (args.length == 0) {
+            sender.sendMessage("引数がありません");
+            return;
+        }
+
         // プレイヤー削除用PATH
         String playerpath = defaultpath + args[0];
 
@@ -52,6 +65,12 @@ public class ModConfig extends JavaPlugin {
     }
 
     public static void addWord(CommandSender sender, FileConfiguration config, String[] args) {
+        // 引数が不足してないか判定
+        if (args.length == 0) {
+            sender.sendMessage("引数がありません");
+            return;
+        }
+
         // コマンド投入者の名前を取得
         String username = sender.getName();
 
@@ -69,13 +88,16 @@ public class ModConfig extends JavaPlugin {
         List<String> wordlist = config.getStringList(wordspath);
 
         // ワードがすでに登録済みか判定
-        if (wordlist.contains(args[0])) {
-            sender.sendMessage("ワード：【" + args[0] + "】はすでに登録されています");
-            return;
+        for (int cnt = 0; cnt < args.length; cnt++) {
+            if (wordlist.contains(args[cnt])) {
+                sender.sendMessage("ワード：【" + args[cnt] + "】はすでに登録されています");
+                continue;
+            }
+
+            //　リストにワードを追加
+            wordlist.add(args[cnt]);
         }
 
-        //　リストにワードを追加
-        wordlist.add(args[0]);
         // コンフィグに設定
         config.set(wordspath, wordlist);
 
@@ -83,6 +105,12 @@ public class ModConfig extends JavaPlugin {
     }
 
     public static void delWord(CommandSender sender, FileConfiguration config, String[] args) {
+        // 引数が不足してないか判定
+        if (args.length == 0) {
+            sender.sendMessage("引数がありません");
+            return;
+        }
+
         // コマンド投入者の名前を取得
         String username = sender.getName();
 
@@ -100,13 +128,16 @@ public class ModConfig extends JavaPlugin {
         List<String> wordlist = config.getStringList(wordspath);
 
         // ワードがすでに登録済みか判定
-        if (!(wordlist.contains(args[0]))) {
-            sender.sendMessage("ワード：【" + args[0] + "】は登録されていません");
-            return;
+        for (int cnt = 0; cnt < args.length; cnt++) {
+            if (!(wordlist.contains(args[cnt]))) {
+                sender.sendMessage("ワード：【" + args[cnt] + "】は登録されていません");
+                continue;
+            }
+
+            //　リストのワードを削除
+            wordlist.remove(args[cnt]);
         }
 
-        //　リストのワードを削除
-        wordlist.remove(args[0]);
         // コンフィグに設定
         config.set(wordspath, wordlist);
 
@@ -114,6 +145,12 @@ public class ModConfig extends JavaPlugin {
     }
 
     public static void setTitle(CommandSender sender, FileConfiguration config, String[] args) {
+        // 引数が不足してないか判定
+        if (args.length == 0) {
+            sender.sendMessage("引数がありません");
+            return;
+        }
+
         // コマンド投入者の名前を取得
         String username = sender.getName();
 
@@ -143,6 +180,12 @@ public class ModConfig extends JavaPlugin {
     }
 
     public static void modsound(CommandSender sender, FileConfiguration config, String[] args) {
+        // 引数が不足してないか判定
+        if (args.length == 0) {
+            sender.sendMessage("引数がありません");
+            return;
+        }
+
         // コマンド投入者の名前を取得
         String username = sender.getName();
 
